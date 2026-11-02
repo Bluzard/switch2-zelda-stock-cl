@@ -46,11 +46,11 @@
       "name": "TodoJuegos",
       "snapshot": {
         "http": 200,
-        "status": "available",
+        "status": "unavailable",
         "price_clp": 669900,
         "title": "Consola Switch 2 Zelda 40th Aniversario [Consola Switch 2]"
       },
-      "last_changed_at": "2026-11-02T18:27:04.000Z"
+      "last_changed_at": "2026-11-02T18:55:04.000Z"
     },
     "https://bestmart.cl/collections/nintendo-switch-2-zelda-edicion-40-aniversario": {
       "name": "bestmart.cl",
