@@ -142,5 +142,12 @@
   },
   "social_discovered": {},
   "retailer_discovered": {},
-  "pending_available": {}
+  "pending_available": {
+    "https://www.todojuegos.cl/Productos/NS2/Consola-Switch-2-Zelda-40th-Aniversario/": {
+      "count": 1,
+      "signature": "{\"status\":\"available\",\"price_clp\":669900,\"title\":\"Consola Switch 2 Zelda 40th Aniversario [Consola Switch 2]\"}",
+      "first_seen_at": "2026-11-02T18:26:04.000Z",
+      "last_seen_at": "2026-11-02T18:26:04.000Z"
+    }
+  }
 }
