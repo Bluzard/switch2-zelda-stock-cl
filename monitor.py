@@ -91,6 +91,7 @@ def main() -> int:
 
     for url, name in targets.items():
         current = inspect(session, name, url)
+        print(f"{name}: {current.status} http={current.http} precio={current.price_clp}", flush=True)
         # Estados no concluyentes o desafíos anti-bot no deben reemplazar
         # el último estado fiable ni generar alertas falsas.
         if current.status in ("error", "unknown"):
