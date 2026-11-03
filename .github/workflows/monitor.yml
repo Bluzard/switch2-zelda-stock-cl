@@ -11,6 +11,8 @@ on:
       - 'scraper.py'
       - 'stores.json'
       - 'requirements.txt'
+  schedule:
+    - cron: '3,13,23,33,43,53 * * * *'
   workflow_dispatch:
     inputs:
       discover:
