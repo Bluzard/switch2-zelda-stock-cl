@@ -202,6 +202,11 @@ def inspect(s: requests.Session, name: str, url: str) -> Product:
         if "santogames.cl" in host and parsed_price is None:
             parsed_status = "unavailable"
 
+        # WePlay (Magento) solo renderiza el botón de compra cuando hay stock vendible;
+        # la descripción menciona "preventa"/"disponible" aunque esté agotada.
+        if "weplay.cl" in host:
+            parsed_status = "available" if soup.select_one("#product-addtocart-button") else "unavailable"
+
         return Product(
             name=name,
             url=url,
