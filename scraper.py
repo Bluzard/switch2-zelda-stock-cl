@@ -162,9 +162,26 @@ def status_from(text: str, availability: str | None, http_status: int) -> str:
         return "available"
     return "unknown"
 
+MAX_FETCH_SECONDS = 30
+
+def get_limited(s: requests.Session, url: str) -> requests.Response:
+    """GET con límite de tiempo TOTAL: algunos anti-bot (p. ej. Ripley) entregan
+    la respuesta a goteo y el timeout de requests es por lectura, no total."""
+    start = time.monotonic()
+    r = s.get(url, timeout=(10, 15), allow_redirects=True, stream=True)
+    body = bytearray()
+    for chunk in r.iter_content(65536):
+        body.extend(chunk)
+        if time.monotonic() - start > MAX_FETCH_SECONDS or len(body) > 8_000_000:
+            r.close()
+            raise requests.Timeout(f"límite total excedido: {url}")
+    r._content = bytes(body)
+    r._content_consumed = True
+    return r
+
 def inspect(s: requests.Session, name: str, url: str) -> Product:
     try:
-        r = s.get(url, timeout=TIMEOUT, allow_redirects=True)
+        r = get_limited(s, url)
         if r.status_code == 404:
             return Product(name, url, 404, None, "page_missing", None)
         if r.status_code in (403, 429) or r.status_code >= 500:
